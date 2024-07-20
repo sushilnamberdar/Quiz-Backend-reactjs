@@ -13,6 +13,7 @@ const saveUserDetails = async(req,res) => {
     if(!emailvalidation.test(email)) {
         return res.status(400).json({message:"Invalid email Format"});
     }
+    console.log("checking the mobile number")
     if(!mobilvalidation.test(mobileno)) {
         return res.status(400).json({message:"Invalid Mobile Number Format"});
     }
@@ -30,7 +31,7 @@ const saveUserDetails = async(req,res) => {
                 } else if (existingUser.email === email) {
                     return res.status(400).json({ message: 'Phone number is incorrect' });
                 } else {
-                    return res.status(400).json({ message: 'Email is incorrect' });
+                    return res.status(400).json({ message: 'Email or phone number Wrong' });
                 }
             }
 
@@ -43,7 +44,7 @@ const saveUserDetails = async(req,res) => {
 
         await newUser.save();
         console.log('User saved successfully');
-        res.send({message:'Welcome to the Quiz App',user:newUser});
+        res.send({message:'Welcome to the Quiz App',existingUser:newUser});
         
 
     } catch (error) {
