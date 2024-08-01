@@ -1,6 +1,7 @@
 const User = require('../Models/UserSchema');
 const testResult = require('../Models/TestSchema')
-const moment = require('moment')
+const moment = require('moment') // for saave the data and time in the database
+
 
 const saveUserDetails = async(req,res) => {
     const {name,email,mobileno } = req.body;
