@@ -7,4 +7,11 @@ function adminSetUser(user) {
     }
     return jwt.sign(payload,secret);
 }
-module.exports = adminSetUser;
+function adminGetUser(token) {
+if(!token) return null;
+return jwt.verify(token,secret);
+
+
+
+}
+module.exports = adminSetUser,adminGetUser;
