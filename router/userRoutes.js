@@ -20,4 +20,7 @@ router.delete('/deleteTestResult', adauth, deleteTestResult);
 router.get('/questions',getQuizQuestions)
 router.post('/addquestion',AddQuestionController)
 router.post('/addjsonfile',Questionfilejson)
+router.get('/' ,()=>{
+    console.log("hello This side Sushil Namberdar");
+})
 module.exports = router;
