@@ -7,7 +7,7 @@ const saveUserDetails = async(req,res) => {
     const {name,email,mobileno } = req.body;
 
     console.log("Request Body=: ", req.body)
-
+    email = email.toLowerCase();
 
     const emailvalidation = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const mobilvalidation = /^[0-9]{10}$/;
