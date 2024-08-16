@@ -56,29 +56,33 @@ const saveUserDetails = async(req,res) => {
 }
 
 
-const savetestdetails = async(req,res) => {
-    try{
-        const {id,numOfQuestion,numOfCorrectQuestion,percentage} = req.body;
-        console.log(req.body);
+const savetestdetails = async (req, res) => {
+  
+    try {
+        const { id, numOfQuestion, numOfCorrectQuestion, percentage, attemptedQuestions } = req.body;
+        console.log("Request Body:", JSON.stringify(req.body, null, 2));
+
         const test_result = new testResult({
-            id,
-            numOfQuestion,
-            numOfCorrectQuestion,
-            percentage,
-            testTakenAT: moment().format('YYYY-MM-DD HH:mm:ss'),
-        })
+            id: req.body.id,
+            numOfQuestion: req.body.totalQuestions,
+            numOfCorrectQuestion: req.body.correctAnswersCount, 
+            percentage: req.body.percentage,
+            attemptedQuestions: req.body.attemptedQuestions,
+            testTakenAT: new Date(),
+        });
+
         await test_result.save();
+        console.log("Result saved successfully");
+        res.status(200).json({ message: 'Test result saved successfully' });
 
-        console.log("result save successfull");
-
-
-
-
-    }catch(error){
-        console.log("Error while saving user details",error);
-        res.status(500).json({message:'internal server error'});
+    } catch (error) {
+        console.log("Error while saving test details", error);
+        res.status(500).json({ message: 'Internal server error' });
     }
+};
 
-}
 
-module.exports = { saveUserDetails ,savetestdetails}
+
+
+
+module.exports = { saveUserDetails, savetestdetails };
